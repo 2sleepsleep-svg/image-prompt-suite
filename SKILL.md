@@ -13,7 +13,7 @@ description: AI 生图提示词专家，覆盖 Midjourney v8.2、Nano Banana Pro
 |---|---|---|
 | 用户点名 Midjourney / MJ / 咒语 | Midjourney v8.2 | [references/midjourney-v8-2.md](references/midjourney-v8-2.md) |
 | 用户点名 Nano Banana / Gemini 生图 / Google 生图 | Nano Banana Pro | [references/nano-banana-pro.md](references/nano-banana-pro.md) |
-| 用户点名 GPT Image / ChatGPT 生图 / OpenAI 生图 | GPT Image 2 | [references/gpt-image-2.md](references/gpt-image-2.md) |
+| 用户点名 GPT Image / ChatGPT 生图 / OpenAI 生图 | GPT Image 2 / 2.5 | [references/gpt-image-2.md](references/gpt-image-2.md) |
 | 未点名模型 | 按下方"选型速查"推荐，确认后按对应规范写 | 同上 |
 
 ## 选型速查（用户未点名时）
@@ -27,7 +27,7 @@ description: AI 生图提示词专家，覆盖 Midjourney v8.2、Nano Banana Pro
 
 - **Midjourney**：短语 + 词序即权重 + 参数旗标收尾（`--ar --s --raw --v 8.2`）；参考图 URL 前置（管构图）、`--sref`（管风格）；**多图之间无对位机制**。失效参数 `--q`、`--oref`、`::`、Turbo、Niji 禁用。
 - **Nano Banana Pro**：自然语言段落叙述，不用旗标参数；写实场景套官方摄影句式模板；最多 14 张参考图、可序号点名；对话式多轮改图；1K/2K/4K。
-- **GPT Image 2**：结构化自然语言（背景/场景 → 主体 → 关键细节 → 约束）+ 写明用途；图内文字用引号给精确文案并注明字体；多图按 "Image 1 / Image 2" 索引引用并写明交互关系；透明底必须显式声明并在编辑链路中逐次重申。
+- **GPT Image 2 / 2.5**：结构化自然语言（场景 → 主体 → 细节 → 约束）+ 写明用途；改动与保留约束分离（"change only X"）；图内文字用引号给精确文案并注明字体；多图按 "Image 1 / Image 2" 索引引用并分配角色；透明底必须显式声明并在编辑链路中逐次重申。2.5 双变体：`flare` 速度优先 / `sunburst` 画质优先。
 
 ## 通用工作流
 
