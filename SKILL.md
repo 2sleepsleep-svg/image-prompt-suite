@@ -1,107 +1,45 @@
 ---
-name: midjourney-v8-2-prompts
-description: Midjourney v8.2 提示词专家。当用户需要编写、优化或翻译 Midjourney 提示词，询问 v8.2 参数用法与兼容性，或要求为特定题材（人像、产品、电影感、建筑、奇幻等）生成出图咒语时使用。适用于 AI 绘画、MJ prompt、Midjourney 咒语场景。不适用于 Stable Diffusion、DALL-E 等其他生图模型的提示词。
+name: image-prompt-suite
+description: AI 生图提示词专家，覆盖 Midjourney v8.2、Nano Banana Pro（Gemini 3 Pro Image）与 GPT Image 2 三个模型。当用户需要编写、优化或翻译任一模型的提示词，询问各模型参数用法与参考图机制，或要求为特定题材生成出图咒语时使用。按用户指定或用途路由到对应写法规范。不适用于 Stable Diffusion、DALL-E 等其他生图模型。
 ---
 
-# Midjourney v8.2 提示词专家
+# AI 生图提示词套件
 
-帮用户把出图需求转写成符合 Midjourney v8.2 规则的提示词，并规避 v8.2 已失效的旧参数。写提示词时像向专业摄影师描述画面，而不是堆砌关键词。
+三个模型的提示词专家。先路由到模型，再按对应规范写。无论哪个模型，交付时每条提示词都必须附**中文逐句对照表**，供不读英文的用户查验。
 
-## v8.2 关键变化
+## 模型路由
 
-v8.2 于 2026-07-24 成为默认版本，重点是美学、画质与个性化：
-
-- 新增 **Edit Model**，取代了旧版的 Omni Reference、Character Reference 和 Retexture。用户要角色一致性或局部修改时，引导其使用 Edit Model，而不是旧参数。
-- 以下旧参数在 v8.2 **全部失效**，任何提示词里都不要出现：
-  - `--q`（Quality）
-  - `--oref` / `--ow`（Omni Reference）
-  - `::` 多提示词加权语法（`--no` 不受影响，仍可用）
-  - Turbo 模式
-  - Niji（独立模型线，不能与 v8.1/v8.2 同用）
-  - `--sv`（仅 v6/v7 有文档，v8.x 未验证，不要猜值）
-
-## 工作流
-
-1. **明确意图**：缺关键信息时先问一句——主体是什么、用途/题材、画幅比例、偏写实还是偏风格化。用户给了完整描述就直接写。
-2. **按模板组装**：用下面的六层结构填写，删除方括号。
-3. **追加参数**：参数串放在最末尾，一次性写完。
-4. **交付时给出**：1 条主提示词 + 可选的 1 条变体（如更高 `--s` 或不同 `--ar`），附一句调参建议；每条提示词后必须附**中文逐句对照表**（左列英文原文、右列中文对照，参数行逐项注明含义），供不读英文的用户查验内容。
-
-## 提示词模板
-
-```
-[主体 — 谁/什么，具体到两个不同的人会想象出同一个画面]
-
-Setting: [场景 — 地点、时间、天气]
-
-Style: [媒介 — 照片/油画/3D渲染/水墨插画等]
-[光线 — 黄金时刻/柔光箱/正午硬光/霓虹等]
-
-Composition: [景别 — 特写/广角/俯拍] [视角]
-
-Mood: [一到两个情绪形容词]
-
---ar [比例] --s [0-1000] --c [0-100] --raw --v 8.2
-```
-
-填写示例：
-
-```
-A weathered lighthouse keeper in his sixties, salt-stained wool sweater,
-binoculars around his neck, standing at the top rail of a lighthouse.
-
-Setting: A rocky North Atlantic coastline at dusk, storm clouds breaking,
-one shaft of sunlight hitting the water.
-
-Style: Cinematic photograph, medium format film grain.
-Backlit by the breaking sunlight, cool blue ambient fill.
-
-Composition: Medium shot, slight low angle looking up at him.
-
-Mood: Weathered, solitary, resolute.
-
---ar 3:2 --s 150 --c 10 --raw --v 8.2
-```
-
-## 参数速查（v8.2 可用）
-
-| 参数 | 范围/默认 | 作用 |
+| 信号 | 模型 | 写法规范 |
 |---|---|---|
-| `--ar` | 默认 1:1 | 画幅比例，整数比（写 139:100，不写 1.39:1），最大 14:1（开 `--hd` 时 4:1） |
-| `--s` | 0-1000，默认 100 | 风格化强度，越低越贴字面，越高越有 MJ 自己的艺术发挥 |
-| `--c` | 0-100，默认 0 | 四张图之间的差异度，探索期调高，目标明确时保持 0 |
-| `--w` | 0-3000，默认 0 | 推向非常规实验性结果，与 `--seed` 不完全兼容 |
-| `--raw` | 开关 | 关闭 MJ 默认美学加成，简单提示词更接近照片真实 |
-| `--no` | — | 排除元素；避免复合短语（`--no modern clothing` 会被拆成两个排除项） |
-| `--seed` | 0-4294967295 | 锁定起始噪声用于对比测试，v8.x 结果"99% 一致"而非保证一致 |
-| `--repeat` / `--r` | 按套餐 | 一次提交跑多次；仅 Fast 模式可用（Basic 2-4、Standard 2-10、Pro/Mega 2-40 次） |
-| `--sref` + `--sw` | URL 或风格码；sw 0-1000 默认 100 | 风格参考 |
-| `--iw` | 默认 1 | 图片提示词权重 |
-| `--p` | 开关 | 个性化；v7 的全局档案直接沿用到 v8.1/v8.2 |
-| `--tile` | 开关 | 无缝平铺图案；平铺图不要放大，会破坏接缝 |
-| `--hd` | 开关 | 高清图（v8.1+ 新增），1:1 时 2048px，GPU 消耗约 1.3 分钟 |
+| 用户点名 Midjourney / MJ / 咒语 | Midjourney v8.2 | [references/midjourney-v8-2.md](references/midjourney-v8-2.md) |
+| 用户点名 Nano Banana / Gemini 生图 / Google 生图 | Nano Banana Pro | [references/nano-banana-pro.md](references/nano-banana-pro.md) |
+| 用户点名 GPT Image / ChatGPT 生图 / OpenAI 生图 | GPT Image 2 | [references/gpt-image-2.md](references/gpt-image-2.md) |
+| 未点名模型 | 按下方"选型速查"推荐，确认后按对应规范写 | 同上 |
 
-GPU 模式注意：Relax 模式下 `--repeat`、排列提示词、HD 视频均不可用；Turbo 在 v8.1/v8.2 不受支持。
+## 选型速查（用户未点名时）
 
-## 硬性规则
+- **艺术氛围、风格探索、概念插画、人像美学** → Midjourney v8.2
+- **真实世界知识重**（真实地标、产品、食物、手部细节）、**多参考图融合**（最多 14 张且可点名对位）、**图内中英文文字较多**、要 4K → Nano Banana Pro
+- **信息图/图表/UI 示意/多面板**、**图内精确文字**（引号给精确文案 + 字体约束）、**透明底素材**、**精确的多图合成指令** → GPT Image 2
+- **想直接用中文写提示词** → Nano Banana Pro 或 GPT Image 2（两者原生理解中文，Midjourney 不行，中文支持详见 MJ 规范的"中文提示词约定"）
 
-- 参数必须放在提示词**最后**，每个 `--` 前留一个空格，参数内部不加逗号或句号。参数后面再写描述文字会静默失效。
-- 拒绝关键词堆砌：不要 "beautiful, stunning, 8k, masterpiece" 这类词，v8.2 会因此退化。
-- 篇幅 50-150 词最佳，超过 150 词通常收益递减。
-- 词序即权重：越靠前的词影响越大，主体永远放最前。
-- 矛盾描述会互相抵消（如 "dark, bright, moody, cheerful"）。
+## 三模型写法速记
 
-## 中文提示词约定
+- **Midjourney**：短语 + 词序即权重 + 参数旗标收尾（`--ar --s --raw --v 8.2`）；参考图 URL 前置（管构图）、`--sref`（管风格）；**多图之间无对位机制**。失效参数 `--q`、`--oref`、`::`、Turbo、Niji 禁用。
+- **Nano Banana Pro**：自然语言段落叙述，不用旗标参数；写实场景套官方摄影句式模板；最多 14 张参考图、可序号点名；对话式多轮改图；1K/2K/4K。
+- **GPT Image 2**：结构化自然语言（背景/场景 → 主体 → 关键细节 → 约束）+ 写明用途；图内文字用引号给精确文案并注明字体；多图按 "Image 1 / Image 2" 索引引用并写明交互关系；透明底必须显式声明并在编辑链路中逐次重申。
 
-- v8.2 对纯中文提示词支持不可靠：不报错但语义打折，抽象词、成语基本没有视觉锚点。默认一律交付英文提示词 + 中文逐句对照，不要因为"用户是中文使用者"就直接写中文提示词。
-- 用户坚持用中文时，给中英混写版（主体、场景保留中文，风格、媒介、摄影术语锚定英文），并说明稳定性不如纯英文。
-- 图内中文文字渲染不可靠；需要图内出现中文（如品牌名、标题）时，建议出图后用修图工具加字。
+## 通用工作流
+
+1. **路由**：按信号确定模型，读对应规范文件。
+2. **明确意图**：缺关键信息先问一句——主体、用途、画幅、写实还是风格化、要不要参考图。
+3. **组装提示词**：严格按对应模型的句式与参数规则写。
+4. **交付**：1 条主提示词 + 可选 1 条变体 + 一句调参建议；每条附中文逐句对照表（左列原文、右列对照，参数/设置行逐项注明含义）。
 
 ## 深入参考
 
-- 参数兼容性全表与失效参数详解：[references/parameters.md](references/parameters.md)
-- 六层结构详解、题材模板与质量词库：[references/templates.md](references/templates.md)
-
-## 资料来源
-
-参数与版本信息核对自 Midjourney 官方文档（2026-09 版）及第三方 v8.2 指南，来源见 references/parameters.md 末尾。若用户报告参数行为不符，建议其以官方 Version 文档为准。
+- Midjourney v8.2 完整规范：[references/midjourney-v8-2.md](references/midjourney-v8-2.md)
+- Midjourney 参数兼容性全表：[references/parameters.md](references/parameters.md)
+- Midjourney 题材模板与质量词库：[references/templates.md](references/templates.md)
+- Nano Banana Pro 写法规范：[references/nano-banana-pro.md](references/nano-banana-pro.md)
+- GPT Image 2 写法规范：[references/gpt-image-2.md](references/gpt-image-2.md)
