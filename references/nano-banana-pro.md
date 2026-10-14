@@ -35,6 +35,9 @@ a [lens type].
 5. **编辑**：一次一个明确指令——加什么、删什么、改什么；多轮逐步逼近，每轮只改一处。
 6. **多参考图**：用序号点名（如"给第 2 张图里的人物穿上第 1 张图的服装"），明确图与图之间的关系。
 7. 开头可用 draw / generate / create 类动词（Gemini Apps 官方建议），并描述想要的风格（photorealistic / charcoal drawing / watercolour 等）。
+8. **语义蒙版局部编辑**（官方 Cloud 指南）：用文字划定蒙版——"只替换画面左侧的天空，其余保持不变"，实现精准局部修改而其余区域不动。
+9. **Grounding 工作流**：需要真实信息时先让模型检索（"use search to find…"），再指定如何把检索结果可视化。
+10. **材质要具体**（官方示例）：别写 "suit jacket"，写 "navy blue tweed"；别写 "armor"，写 "ornate elven plate armor, etched with silver leaf patterns"。
 
 ## 参数（API 与对话端）
 
