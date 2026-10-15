@@ -21,8 +21,8 @@
 
 ## 提示词写法（官方依据）
 
-1. **自然语言段落叙述**，描述场景越具体控制越强。不堆关键词、没有任何 `--` 旗标参数。
-2. **写实场景套官方摄影句式模板**：
+1. **自然语言段落叙述**，具体描述用于落实用户需要的控制；未指定部分按主文件保留创作空间。不堆关键词、没有任何 `--` 旗标参数。
+2. **写实场景可参考摄影句式模板**：按需取用，不必补齐机位、镜头或光线字段。
 
 ```
 A photorealistic [type of shot] of a [subject description] in a [setting
@@ -30,14 +30,14 @@ description]. [Description of the light]. Shot from a [camera angle] with
 a [lens type].
 ```
 
-3. **摄影词汇决定视觉基因**（官方 Cloud 指南）：点名机身（GoPro 动感畸变 / Fujifilm 色彩科学 / 一次性相机复古闪光感）、镜头与光圈（low-angle shot with shallow depth of field, f/1.8）、光线描述。
+3. **摄影词汇按需使用**：用户要求特定摄影效果时，可描述机身效果、镜头、光圈或光线；不默认指定相机参数来限制探索。
 4. **图内文字**：把要出现的文字放进引号，注明字体风格、位置；版式复杂时描述层级关系。
 5. **编辑**：一次一个明确指令——加什么、删什么、改什么；多轮逐步逼近，每轮只改一处。
 6. **多参考图**：用序号点名（如"给第 2 张图里的人物穿上第 1 张图的服装"），明确图与图之间的关系。
 7. 开头可用 draw / generate / create 类动词（Gemini Apps 官方建议），并描述想要的风格（photorealistic / charcoal drawing / watercolour 等）。
 8. **语义蒙版局部编辑**（官方 Cloud 指南）：用文字划定蒙版——"只替换画面左侧的天空，其余保持不变"，实现精准局部修改而其余区域不动。
 9. **Grounding 工作流**：需要真实信息时先让模型检索（"use search to find…"），再指定如何把检索结果可视化。
-10. **材质要具体**（官方示例）：别写 "suit jacket"，写 "navy blue tweed"；别写 "armor"，写 "ornate elven plate armor, etched with silver leaf patterns"。
+10. **材质按要求具体化**：用户已指定面料、颜色或纹饰时准确写出；只要求 "suit jacket" 时，不擅自扩写成 "navy blue tweed"。具体材质是控制选项，不是每条提示词的必填项。
 
 ## 参数（API 与对话端）
 
