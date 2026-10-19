@@ -79,3 +79,6 @@ description: AI 生图提示词专家，覆盖 Midjourney v8.2、Nano Banana Pro
 - Midjourney 题材模板与质量词库：[references/templates.md](references/templates.md)
 - Nano Banana Pro 写法规范：[references/nano-banana-pro.md](references/nano-banana-pro.md)
 - GPT Image 2 写法规范：[references/gpt-image-2.md](references/gpt-image-2.md)
+
+## 创作者偏好（2026-10-19）
+延续本用户的视频或图片创作、修复生成结果时，读取 [创作者偏好](references/creator-reference-preferences.md)，保留已确认事件、素材分工与最新局部要求；项目限定不得泛化。
