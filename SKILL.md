@@ -88,6 +88,8 @@ description: AI 生图提示词专家，覆盖 Midjourney v8.2、Nano Banana Pro
 
 ## 深入参考
 
+- 写实生物、混合物种或虚构道具的形体与材质难以同时控制时，读[生物造型与材质分工](references/creature-shape-and-materials.md)，按需分层制作；收益后补测试，不强制四步或更换模型。
+
 - 资产状态派生、局部材质修复、重打光、反打空间与站位参考：读[资产状态与局部修复](references/asset-state-and-local-repair.md)。2026-11-14用户明确授权本轮有价值方法先吸收、后补测试；已采用方法与未经验证的效果保证分开记录。
 
 - 用户提出提升技能、做对照测试或验证不确定／冲突经验时，主动读取[待验证经验](references/pending-experiences.md)，按当次任务与预算提出测试。用户已授权将本轮Higgsfield疑点保存为候选；它们不是默认规则，升级为默认经验仍按确认流程。
